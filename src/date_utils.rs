@@ -11,20 +11,16 @@ pub struct DateInfo {
 impl DateInfo {
     pub fn new() -> DateInfo {
         let now = chrono::offset::Local::now();
-        let this_year = now.year();
-        let this_month = now.month();
-        let this_week = now.iso_week().week();
-        let this_day = now.day();
+        let year = now.year();
+        let month = now.month();
+        let week = now.iso_week().week();
+        let day = now.day();
         DateInfo {
-            today: NaiveDate::from_ymd(this_year, this_month, this_day),
-            monday: NaiveDate::from_isoywd(this_year, this_week, Weekday::Mon),
-            sunday: NaiveDate::from_isoywd(this_year, this_week, Weekday::Sun),
-            start_of_month: NaiveDate::from_ymd(this_year, this_month, 1),
-            end_of_month: NaiveDate::from_ymd(
-                this_year,
-                this_month,
-                get_days_in_month(this_year, this_month),
-            ),
+            today: NaiveDate::from_ymd(year, month, day),
+            monday: NaiveDate::from_isoywd(year, week, Weekday::Mon),
+            sunday: NaiveDate::from_isoywd(year, week, Weekday::Sun),
+            start_of_month: NaiveDate::from_ymd(year, month, 1),
+            end_of_month: NaiveDate::from_ymd(year, month, get_days_in_month(year, month)),
         }
     }
 }
