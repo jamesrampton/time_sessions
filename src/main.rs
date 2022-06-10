@@ -1,10 +1,9 @@
-use chrono::{Datelike, NaiveDate, Weekday};
-use clap::Parser;
-use open::that as open_that;
-
 mod args;
 
 use args::TimesessionsArgs;
+use chrono::{Datelike, NaiveDate, Weekday};
+use clap::Parser;
+use open::that as open_that;
 
 fn main() {
     let args = TimesessionsArgs::parse();
