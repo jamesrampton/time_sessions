@@ -32,7 +32,7 @@ fn main() {
 
     let url_base = format!(
         "https://{}.codebasehq.com/reports/time_tracking",
-        args.subdomain
+        args.account
     );
     let url_base_params = "?utf8=✓&time_sessions_filter[criteria][][column]=user&time_sessions_filter[criteria][][operator]=equal&time_sessions_filter[criteria][][data]=";
     let url_from_date_param = "&time_sessions_filter[criteria][][column]=occurred_on&time_sessions_filter[criteria][][operator]=greater-than-equal&time_sessions_filter[criteria][][data]=";
