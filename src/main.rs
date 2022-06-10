@@ -2,19 +2,12 @@ use chrono::{Datelike, NaiveDate, Weekday};
 use clap::Parser;
 use open::that as open_that;
 
-#[derive(Parser, Debug)]
-#[clap(author, version, about, long_about = None)]
-struct Args {
-    #[clap(short, long)]
-    subdomain: String,
-    #[clap(short, long)]
-    user_id: u32,
-    #[clap(short, long)]
-    period: String,
-}
+mod args;
+
+use args::TimesessionsArgs;
 
 fn main() {
-    let args = Args::parse();
+    let args = TimesessionsArgs::parse();
 
     let this_year = chrono::offset::Local::now().year();
     let this_week = chrono::offset::Local::now().iso_week().week();
