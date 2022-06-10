@@ -34,21 +34,17 @@ fn main() {
         "https://{}.codebasehq.com/reports/time_tracking",
         args.account
     );
-    let url_base_params = "?utf8=✓&time_sessions_filter[criteria][][column]=user&time_sessions_filter[criteria][][operator]=equal&time_sessions_filter[criteria][][data]=";
-    let url_from_date_param = "&time_sessions_filter[criteria][][column]=occurred_on&time_sessions_filter[criteria][][operator]=greater-than-equal&time_sessions_filter[criteria][][data]=";
-    let url_to_date_param = "&time_sessions_filter[criteria][][column]=occurred_on&time_sessions_filter[criteria][][operator]=less-than-equal&time_sessions_filter[criteria][][data]=";
+    let url_base_params = format!("?utf8=✓&time_sessions_filter[criteria][][column]=user&time_sessions_filter[criteria][][operator]=equal&time_sessions_filter[criteria][][data]={}", args.user_id);
+    let url_from_date_param = format!("&time_sessions_filter[criteria][][column]=occurred_on&time_sessions_filter[criteria][][operator]=greater-than-equal&time_sessions_filter[criteria][][data]={}", from_date);
+    let url_to_date_param = format!("&time_sessions_filter[criteria][][column]=occurred_on&time_sessions_filter[criteria][][operator]=less-than-equal&time_sessions_filter[criteria][][data]={}", to_date);
     let url_suffix_params = "&commit=Filter+Time+Sessions";
 
     let path = format!(
         "{url_base}\
     {url_base_params}\
-    {}\
     {url_from_date_param}\
-    {from_date}\
     {url_to_date_param}\
-    {to_date}\
-    {url_suffix_params}",
-        args.user_id
+    {url_suffix_params}"
     );
 
     match open_that(path) {
