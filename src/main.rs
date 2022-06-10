@@ -2,34 +2,20 @@ mod args;
 mod date_utils;
 
 use args::TimesessionsArgs;
-use chrono::{Datelike, NaiveDate, Weekday};
 use clap::Parser;
-use date_utils::get_days_in_month;
+use date_utils::DateInfo;
 use open::that as open_that;
 
 fn main() {
     let args = TimesessionsArgs::parse();
 
-    let this_year = chrono::offset::Local::now().year();
-    let this_week = chrono::offset::Local::now().iso_week().week();
-    let this_month = chrono::offset::Local::now().month();
-    let this_day = chrono::offset::Local::today().day();
-
-    let today = NaiveDate::from_ymd(this_year, this_month, this_day);
-    let monday = NaiveDate::from_isoywd(this_year, this_week, Weekday::Mon);
-    let sunday = NaiveDate::from_isoywd(this_year, this_week, Weekday::Sun);
-    let start_of_month = NaiveDate::from_ymd(this_year, this_month, 1);
-    let end_of_month = NaiveDate::from_ymd(
-        this_year,
-        this_month,
-        get_days_in_month(this_year, this_month),
-    );
+    let date_info = DateInfo::new();
 
     let (from_date, to_date) = match args.period.as_ref() {
-        "day" => (today, today),
-        "week" => (monday, sunday),
-        "month" => (start_of_month, end_of_month),
-        _ => (today, today), // Probably don't need the initial "day" case.
+        "day" => (date_info.today, date_info.today),
+        "week" => (date_info.monday, date_info.sunday),
+        "month" => (date_info.start_of_month, date_info.end_of_month),
+        _ => (date_info.today, date_info.today), // Probably don't need the initial "day" case.
     };
 
     let url_base = format!(
