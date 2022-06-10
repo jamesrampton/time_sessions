@@ -10,10 +10,11 @@ pub struct DateInfo {
 
 impl DateInfo {
     pub fn new() -> DateInfo {
-        let this_year = chrono::offset::Local::now().year();
-        let this_month = chrono::offset::Local::now().month();
-        let this_week = chrono::offset::Local::now().iso_week().week();
-        let this_day = chrono::offset::Local::today().day();
+        let now = chrono::offset::Local::now();
+        let this_year = now.year();
+        let this_month = now.month();
+        let this_week = now.iso_week().week();
+        let this_day = now.day();
         DateInfo {
             today: NaiveDate::from_ymd(this_year, this_month, this_day),
             monday: NaiveDate::from_isoywd(this_year, this_week, Weekday::Mon),
