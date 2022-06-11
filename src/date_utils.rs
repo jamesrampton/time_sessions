@@ -9,13 +9,13 @@ pub struct DateInfo {
 }
 
 impl DateInfo {
-    pub fn new() -> DateInfo {
+    pub fn new() -> Self {
         let now = chrono::offset::Local::now();
         let year = now.year();
         let month = now.month();
         let week = now.iso_week().week();
         let day = now.day();
-        DateInfo {
+        Self {
             today: NaiveDate::from_ymd(year, month, day),
             monday: NaiveDate::from_isoywd(year, week, Weekday::Mon),
             sunday: NaiveDate::from_isoywd(year, week, Weekday::Sun),
