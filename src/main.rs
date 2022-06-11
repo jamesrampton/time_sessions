@@ -9,7 +9,7 @@ use open::that as open_that;
 fn main() {
     let args = TimesessionsArgs::parse();
 
-    let date_info = DateInfo::new();
+    let date_info = DateInfo::default();
 
     let (from_date, to_date) = match args.period.as_ref() {
         "day" => (date_info.today, date_info.today),

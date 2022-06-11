@@ -8,8 +8,8 @@ pub struct DateInfo {
     pub end_of_month: NaiveDate,
 }
 
-impl DateInfo {
-    pub fn new() -> Self {
+impl Default for DateInfo {
+    fn default() -> Self {
         let now = chrono::offset::Local::now();
         let year = now.year();
         let month = now.month();
