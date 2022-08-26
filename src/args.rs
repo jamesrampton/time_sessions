@@ -7,6 +7,6 @@ pub struct TimesessionsArgs {
     pub account: String,
     #[clap(short, long)]
     pub user_id: u32,
-    #[clap(short, long)]
+    #[clap(default_value="day", short, long)]
     pub period: String,
 }
