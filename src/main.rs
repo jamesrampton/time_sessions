@@ -15,6 +15,7 @@ fn main() {
         "day" => (date_info.today, date_info.today),
         "week" => (date_info.monday, date_info.sunday),
         "month" => (date_info.start_of_month, date_info.end_of_month),
+        "last_month" => (date_info.start_of_last_month, date_info.end_of_last_month),
         _ => (date_info.today, date_info.today), // Probably don't need the initial "day" case.
     };
 
